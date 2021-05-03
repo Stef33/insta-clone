@@ -17,7 +17,8 @@ module.exports = {
           user_id: user_id,
           display_name: result.forename + ' ' + result.surname,
           image: req.body.image,
-          desc: req.body.desc
+          desc: req.body.desc,
+          timestamp: Date().now()
         })
 
         newpost.save()
@@ -27,6 +28,14 @@ module.exports = {
           .catch(err => {
             if (err) res.send({ success: false, error: err})
           })
+    })
+  },
+  getposts: (req, res) => {
+    model.find().then(result => {
+      result = result.sort(function(a, b) {
+        return b.timestamp - a.timestamp
+      })
+      res.send(result)
     })
   }
 }
