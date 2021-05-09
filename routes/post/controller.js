@@ -18,7 +18,7 @@ module.exports = {
           display_name: result.forename + ' ' + result.surname,
           image: req.body.image,
           desc: req.body.desc,
-          timestamp: Date().now()
+          timestamp: Date.now()
         })
 
         newpost.save()
